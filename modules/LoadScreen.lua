@@ -2,7 +2,7 @@ local TweenService = game:GetService("TweenService")
 
 local Load = {}
 
-function Load:Constructor(counts, parent)
+function Load:Constructor(counts, version, parent)
     local ScreenLoaded = Instance.new("Frame")
     local _h6_loaded_logo = Instance.new("TextLabel")
     local _h6_loaded_version = Instance.new("TextLabel")
@@ -42,7 +42,7 @@ function Load:Constructor(counts, parent)
     _h6_loaded_version.Size = UDim2.new(0, 129, 0, 18)
     _h6_loaded_version.ZIndex = 3001
     _h6_loaded_version.Font = Enum.Font.Jura
-    _h6_loaded_version.Text = "GUID: 1.1"
+    _h6_loaded_version.Text = "GUID: "..tostring(version)
     _h6_loaded_version.TextColor3 = Color3.fromRGB(204, 204, 204)
     _h6_loaded_version.TextSize = 14.000
     _h6_loaded_version.TextXAlignment = Enum.TextXAlignment.Right

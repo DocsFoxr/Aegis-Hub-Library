@@ -1,22 +1,16 @@
+--Services
 local UserInputService = game:GetService("UserInputService");
 local TweenService = game:GetService("TweenService");
 local CoreGui = game:GetService('CoreGui');
 local RenderStepped = game:GetService("RunService").RenderStepped;
-local HttpService = game:GetService("HttpService")
 local LocalPlayer = game:GetService("Players").LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
 
+--Load Modules
+local Api = loadstring(game.HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua"));
 --local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end)
-function HashCode()
-     local request = syn.request({
-        Url = "https://aegishub.onrender.com/api/keys/generate",  -- This website helps debug HTTP requests
-        Method = "GET"
-    })
-    local response = HttpService:JSONDecode(request.Body)
-    return { response.value, request.StatusCode }
-end
 
-local StatusClient = HashCode()
+local StatusClient = Api:GetHashCode();
 local Aegis = Instance.new("ScreenGui")
 Aegis.Name = StatusClient[1]
 Aegis.ZIndexBehavior = Enum.ZIndexBehavior.Global
@@ -134,7 +128,7 @@ do
                local status, Module = pcall(game.HttpGet, game, "https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua")
                if status then
                     local Load = loadstring(Module)();
-                    local LibraryLoad = Load:Constructor(4, _Body)
+                    local LibraryLoad = Load:Constructor(4, Api:GetVersion(), _Body)
                     LibraryLoad:__Push("Compilando URL...")
                end
           end
