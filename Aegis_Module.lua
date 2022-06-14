@@ -89,6 +89,7 @@ do
                load = info.Load or false
           }
           local _Body = Instance.new("Frame")
+          local _Article = Instance.new("Frame")
           local UIPadding = Instance.new("UIPadding")
           local UIStroke = Instance.new("UIStroke")
 
@@ -122,6 +123,21 @@ do
           _Body.Size = UDim2.new(0, 400, 0, 300)
           _Body.ZIndex = 3000
 
+          _Article.Name = "_Article"
+          _Article.Parent = _Body
+          _Article.BackgroundColor3 = Theme.BackgroundColor
+          _Article.BorderSizePixel = 0
+          _Article.Size = UDim2.new(1, 0, 1, 0)
+
+          UIPadding.Parent = _Body
+          UIPadding.PaddingBottom = UDim.new(0, 2)
+          UIPadding.PaddingLeft = UDim.new(0, 1)
+          UIPadding.PaddingRight = UDim.new(0, 2)
+          UIPadding.PaddingTop = UDim.new(0, 1)
+
+          UIStroke.Color = Theme.BorderColor
+          UIStroke.Parent = _Body
+
           if window.load then
                task.spawn(function()
                     local Status, Module = pcall(game.HttpGet, game, "https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua")
@@ -143,17 +159,8 @@ do
                end)
           end
 
-          UIPadding.Parent = _Body
-          UIPadding.PaddingBottom = UDim.new(0, 2)
-          UIPadding.PaddingLeft = UDim.new(0, 1)
-          UIPadding.PaddingRight = UDim.new(0, 2)
-          UIPadding.PaddingTop = UDim.new(0, 1)
-
-          UIStroke.Color = Theme.BorderColor
-          UIStroke.Parent = _Body
-
           _navbar.Name = "_navbar"
-          _navbar.Parent = _Body
+          _navbar.Parent = _Article
           _navbar.BackgroundColor3 = Tools:GetDarkColor(Theme.BackgroundColor);
           _navbar.BorderColor3 = Color3.fromRGB(27, 42, 53)
           _navbar.BorderSizePixel = 0
@@ -246,7 +253,7 @@ do
           _main_display.SortOrder = Enum.SortOrder.LayoutOrder
 
           _header.Name = "_header"
-          _header.Parent = _Body
+          _header.Parent = _Article
           _header.BackgroundColor3 = Tools:GetDarkColor(Theme.BackgroundColor);
           _header.BorderColor3 = Color3.fromRGB(0, 0, 0)
           _header.BorderSizePixel = 0
@@ -268,7 +275,7 @@ do
           _h2.TextSize = 14.000
 
           _content.Name = "_content"
-          _content.Parent = _Body
+          _content.Parent = _Article
           _content.BackgroundColor3 = Theme.BackgroundColor
           _content.BorderColor3 = Color3.fromRGB(27, 42, 53)
           _content.BorderSizePixel = 0
