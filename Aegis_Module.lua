@@ -7,7 +7,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
 
 --Load Modules
-local Api = loadstring(game.HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua"));
+local Api = loadstring(game.HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/Api.lua"));
 --local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end)
 
 local StatusClient = Api:GetHashCode();
