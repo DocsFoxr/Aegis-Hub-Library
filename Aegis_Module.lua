@@ -128,8 +128,16 @@ do
                local status, Module = pcall(game.HttpGet, game, "https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua")
                if status then
                     local Load = loadstring(Module)();
-                    local LibraryLoad = Load:Constructor(4, Api:GetVersion(), _Body)
+                    local LibraryLoad = Load:Constructor(10, Api:GetVersion(), _Body)
                     LibraryLoad:__Push("Compilando URL...")
+                    task.wait(1)
+                    LibraryLoad:__Push("Looking for a version...")
+
+                    if Api:GetVersion() then
+                         LibraryLoad:__Push("Version found successfully!")
+                         task.wait(1)
+                         LibraryLoad:__Push("Ready to Launch!")
+                    end
                end
           end
 
