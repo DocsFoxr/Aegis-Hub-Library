@@ -1,3 +1,4 @@
+print("Service Init!")
 --Services
 local UserInputService = game:GetService("UserInputService");
 local TweenService = game:GetService("TweenService");
@@ -7,7 +8,8 @@ local LocalPlayer = game:GetService("Players").LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
 
 --Load Modules
-local Api = loadstring(game.HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/Api.lua"));
+local Api = loadstring(game:HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/Api.lua"))();
+print(Api)
 --local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end)
 
 local StatusClient = Api:GetHashCode();
@@ -83,10 +85,6 @@ do
 end
 
 do
-     function Library:_GUID()
-          return 
-     end
-
      function Library:CreateWindow(info)
           local window = {
                title = info.Title or "New Window",
