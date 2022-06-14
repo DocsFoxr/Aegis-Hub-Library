@@ -53,11 +53,11 @@ function Load:Constructor(parent)
     _div_Load.BackgroundColor3 = Color3.fromRGB(198, 198, 198)
     _div_Load.Position = UDim2.new(0.5, 0, 0.5, 0)
     _div_Load.ZIndex = 3001
-    
+
     _div_corner.CornerRadius = UDim.new(1, 0)
     _div_corner.Name = "_div_corner"
     _div_corner.Parent = _div_Load
-    
+
     _span.Name = "_span"
     _span.Parent = ScreenLoaded
     _span.AnchorPoint = Vector2.new(0.5, 0.5)
