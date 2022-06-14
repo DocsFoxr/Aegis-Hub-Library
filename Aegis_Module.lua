@@ -12,6 +12,8 @@ local Api = loadstring(game.HttpGet("https://raw.githubusercontent.com/DocsFoxr/
 
 local StatusClient = Api:GetHashCode();
 local Aegis = Instance.new("ScreenGui")
+--ProtectGui(Aegis)
+
 Aegis.Name = StatusClient[1]
 Aegis.ZIndexBehavior = Enum.ZIndexBehavior.Global
 Aegis.Parent = CoreGui
@@ -129,7 +131,7 @@ do
                if status then
                     local Load = loadstring(Module)();
                     local LibraryLoad = Load:Constructor(10, Api:GetVersion(), _Body)
-                    LibraryLoad:__Push("Compilando URL...")
+                    LibraryLoad:__Push("Compiling URL...")
                     task.wait(1)
                     LibraryLoad:__Push("Looking for a version...")
 
@@ -137,6 +139,8 @@ do
                          LibraryLoad:__Push("Version found successfully!")
                          task.wait(1)
                          LibraryLoad:__Push("Ready to Launch!")
+                         task.wait(1)
+                         LibraryLoad:Close()
                     end
                end
           end
@@ -873,7 +877,4 @@ do
      end
 end
 
-local createwin = Library:CreateWindow({
-     Title = 'Hola marcianito!',
-     Load = true
-})
+return Library
