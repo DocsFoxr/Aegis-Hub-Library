@@ -6,6 +6,10 @@ function Load:Constructor(parent)
     local ScreenLoaded = Instance.new("Frame")
     local _h6_loaded_logo = Instance.new("TextLabel")
     local _h6_loaded_version = Instance.new("TextLabel")
+    local _div_Load = Instance.new("Frame")
+    local _div_corner = Instance.new("UICorner")
+    local _span = Instance.new("Frame")
+    local _span_corner = Instance.new("UICorner")
 
     ScreenLoaded.Name = "ScreenLoaded"
     ScreenLoaded.Parent = parent
@@ -42,6 +46,35 @@ function Load:Constructor(parent)
     _h6_loaded_version.TextColor3 = Color3.fromRGB(204, 204, 204)
     _h6_loaded_version.TextSize = 14.000
     _h6_loaded_version.TextXAlignment = Enum.TextXAlignment.Right
+
+    _div_Load.Name = "_div_Load"
+    _div_Load.Parent = ScreenLoaded
+    _div_Load.AnchorPoint = Vector2.new(0.5, 0.5)
+    _div_Load.BackgroundColor3 = Color3.fromRGB(198, 198, 198)
+    _div_Load.Position = UDim2.new(0.5, 0, 0.5, 0)
+    _div_Load.ZIndex = 3001
+    
+    _div_corner.CornerRadius = UDim.new(1, 0)
+    _div_corner.Name = "_div_corner"
+    _div_corner.Parent = _div_Load
+    
+    _span.Name = "_span"
+    _span.Parent = ScreenLoaded
+    _span.AnchorPoint = Vector2.new(0.5, 0.5)
+    _span.BackgroundColor3 = Color3.fromRGB(182, 182, 182)
+    _span.Position = UDim2.new(0.5, 0, 0.5, 0)
+    _span.Size = UDim2.new(0, 30, 0, 30)
+    _span.ZIndex = 3001
+
+    _span_corner.CornerRadius = UDim.new(1, 0)
+    _span_corner.Name = "_span_corner"
+    _span_corner.Parent = _span
+
+    local _divTween = TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, -1)
+	local _spanTween = TweenInfo.new(2/2, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut, -1, true)
+
+	TweenService:Create(_div_Load, _divTween, { Size = UDim2.fromOffset(70, 70), BackgroundTransparency = 1}):Play()
+	TweenService:Create(_span, _spanTween, { Size = UDim2.fromOffset(33, 33) }):Play()
 
     self.Items = {
         _Frame_Main = ScreenLoaded,
