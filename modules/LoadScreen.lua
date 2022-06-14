@@ -2,7 +2,7 @@ local TweenService = game:GetService("TweenService")
 
 local Load = {}
 
-function Load:Constructor(counts, version, parent)
+function Load:Constructor(counts, parent)
     local ScreenLoaded = Instance.new("Frame")
     local _h6_loaded_logo = Instance.new("TextLabel")
     local _h6_loaded_version = Instance.new("TextLabel")
@@ -42,7 +42,7 @@ function Load:Constructor(counts, version, parent)
     _h6_loaded_version.Size = UDim2.new(0, 129, 0, 18)
     _h6_loaded_version.ZIndex = 3001
     _h6_loaded_version.Font = Enum.Font.Jura
-    _h6_loaded_version.Text = "GUID: "..tostring(version)
+    _h6_loaded_version.Text = "GUID: Finding..."
     _h6_loaded_version.TextColor3 = Color3.fromRGB(204, 204, 204)
     _h6_loaded_version.TextSize = 14.000
     _h6_loaded_version.TextXAlignment = Enum.TextXAlignment.Right
@@ -105,7 +105,7 @@ function Load:Constructor(counts, version, parent)
         _Frame_Main = ScreenLoaded,
         _Div_Load = _div_Load,
         Children = {
-            _h6_loaded_version,
+            Status = _h6_loaded_version,
             _h6_loaded_logo
         }
     }
@@ -139,6 +139,11 @@ function Load:Constructor(counts, version, parent)
         else
             self.Pusheds.Text = "BASH<font color='#ff557f'> > </font>"..tostring(description)
         end
+    end
+
+    function Prototype:SetVersion(GUID)
+        local _label_version = self.Library.Items.Status
+        _label_version.Text = "GUID: "..tostring(GUID)
     end
 
     function Prototype:Close()
