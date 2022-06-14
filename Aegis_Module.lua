@@ -128,6 +128,7 @@ do
           _Article.BackgroundColor3 = Theme.BackgroundColor
           _Article.BorderSizePixel = 0
           _Article.Size = UDim2.new(1, 0, 1, 0)
+          _Article.Visible = false
 
           UIPadding.Parent = _Body
           UIPadding.PaddingBottom = UDim.new(0, 2)
@@ -152,7 +153,9 @@ do
                          if _AssymblyVersion then
                               LibraryLoad:SetVersion(_AssymblyVersion) task.wait(0.3)
                               LibraryLoad:__Push("Version found successfully!") task.wait(1)
-                              LibraryLoad:__Push("Ready to Launch!") task.wait(1)
+                              LibraryLoad:__Push("Ready to Launch!")
+                              _Article.Visible = true
+                              task.wait(1)
                               LibraryLoad:Close()
                          end
                     end
