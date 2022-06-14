@@ -1,4 +1,3 @@
-print("Service Init!")
 --Services
 local UserInputService = game:GetService("UserInputService");
 local TweenService = game:GetService("TweenService");
@@ -125,21 +124,19 @@ do
 
           if window.load then
                task.spawn(function()
-                    local status, Module = pcall(game.HttpGet, game, "https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua")
-                    if status then
-                         local Load = loadstring(Module)();
-                         local LibraryLoad = Load:Constructor(10, _Body)
+                    local Status, Module = pcall(game.HttpGet, game, "https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua")
+
+                    if Status then
+                         local LibraryLoad = Module:Constructor(_Body)
                          LibraryLoad:__Push("Compiling URL...")
                          task.wait(1)
                          LibraryLoad:__Push("Looking for a version...")
 
                          local _AssymblyVersion = Api:GetVersion()
                          if _AssymblyVersion then
-                              LibraryLoad:__Push("Version found successfully!")
-                              LibraryLoad:SetVersion(_AssymblyVersion)
-                              task.wait(1)
-                              LibraryLoad:__Push("Ready to Launch!")
-                              task.wait(1)
+                              LibraryLoad:SetVersion(_AssymblyVersion) task.wait(0.3)
+                              LibraryLoad:__Push("Version found successfully!") task.wait(1)
+                              LibraryLoad:__Push("Ready to Launch!") task.wait(1)
                               LibraryLoad:Close()
                          end
                     end
