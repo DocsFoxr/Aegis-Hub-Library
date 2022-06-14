@@ -135,7 +135,7 @@ function Load:Constructor(counts, parent)
             _h6_loaded_status.TextXAlignment = Enum.TextXAlignment.Left
             _h6_loaded_status.RichText = true;
 
-            table.insert(self.Library.Children, _h6_loaded_status);
+            table.insert(self.Items.Children, _h6_loaded_status);
         else
             self.Pusheds.Text = "BASH<font color='#ff557f'> > </font>"..tostring(description)
         end

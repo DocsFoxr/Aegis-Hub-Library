@@ -131,11 +131,10 @@ do
           _Body.ZIndex = 3000
 
           if window.load then
-               local Status, Script = pcall(game.HttpGet, game, 'https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua');
-
-               if Status then
-                    local Load = loadstring(Script)();
-                    local LibraryLoad = Load:Constructor(5, _Body)
+               local status, Module = pcall(game.HttpGet, game, "https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/LoadScreen.lua")
+               if status then
+                    local Load = loadstring(Module)();
+                    local LibraryLoad = Load:Constructor(4, _Body)
                     LibraryLoad:__Push("Compilando URL...")
                end
           end
