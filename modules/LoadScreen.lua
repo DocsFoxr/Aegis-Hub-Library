@@ -73,11 +73,19 @@ function Load:Constructor(parent)
     local _divTween = TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, -1)
 	local _spanTween = TweenInfo.new(2/2, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut, -1, true)
 
-	TweenService:Create(_div_Load, _divTween, { Size = UDim2.fromOffset(70, 70), BackgroundTransparency = 1}):Play()
-	TweenService:Create(_span, _spanTween, { Size = UDim2.fromOffset(33, 33) }):Play()
+	local Tween1 = TweenService:Create(_div_Load, _divTween, { Size = UDim2.fromOffset(70, 70), BackgroundTransparency = 1})
+	local Tween2 = TweenService:Create(_span, _spanTween, { Size = UDim2.fromOffset(33, 33) })
+
+    Tween1:Play()
+    Tween2:Play()
 
     self.Items = {
         _Frame_Main = ScreenLoaded,
+        Forms = {
+            _div_Load = _div_Load,
+            _span = _span
+        },
+        Tweens = { Tween1, Tween2 },
         Children = {
             Status = _h6_loaded_version,
             _h6_loaded_logo
@@ -122,9 +130,15 @@ function Load:Constructor(parent)
 
     function Prototype:Close()
         local Library = self.Library
+        local Tweens = Library.Tweens
+
+        Tweens[1]:Stop()
+        Tweens[2]:Stop()
 
         local TweenInfo = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.In)
         TweenService:Create(Library._Frame_Main, TweenInfo, { BackgroundTransparency = 1 }):Play()
+        TweenService:Create(Library.Forms._div_Load, TweenInfo, { BackgroundTransparency = 1 }):Play()
+        TweenService:Create(Library.Forms._span, TweenInfo, { BackgroundTransparency = 1 }):Play()
 
         for _, v in pairs(Library.Children) do
             if v:IsA('TextLabel') then
