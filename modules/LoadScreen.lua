@@ -81,10 +81,7 @@ function Load:Constructor(parent)
 
     self.Items = {
         _Frame_Main = ScreenLoaded,
-        Forms = {
-            _div_Load = _div_Load,
-            _span = _span
-        },
+        Forms = { _div_Load, _span },
         Tweens = { Tween1, Tween2 },
         Children = {
             Status = _h6_loaded_version,
@@ -132,17 +129,17 @@ function Load:Constructor(parent)
         local Library = self.Library
         local Tweens = Library.Tweens
 
-        Tweens[1]:Stop()
-        Tweens[2]:Stop()
+        Tweens[1]:Cancel()
+        Tweens[2]:Cancel()
 
-        local TweenInfo = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.In)
-        TweenService:Create(Library._Frame_Main, TweenInfo, { BackgroundTransparency = 1 }):Play()
-        TweenService:Create(Library.Forms._div_Load, TweenInfo, { BackgroundTransparency = 1 }):Play()
-        TweenService:Create(Library.Forms._span, TweenInfo, { BackgroundTransparency = 1 }):Play()
+        local TweenData = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.In)
+        TweenService:Create(Library._Frame_Main, TweenData, { BackgroundTransparency = 1 }):Play()
+        TweenService:Create(Library.Forms[1], TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
+        TweenService:Create(Library.Forms[2], TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
 
         for _, v in pairs(Library.Children) do
             if v:IsA('TextLabel') then
-                TweenService:Create(v, TweenInfo, { TextTransparency = 1 }):Play()
+                TweenService:Create(v, TweenData, { TextTransparency = 1 }):Play()
             end
         end
 

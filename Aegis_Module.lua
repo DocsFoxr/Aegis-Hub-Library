@@ -1,6 +1,7 @@
 --Services
 local UserInputService = game:GetService("UserInputService");
 local TweenService = game:GetService("TweenService");
+local TextService = game:GetService("TextService")
 local CoreGui = game:GetService('CoreGui');
 local RenderStepped = game:GetService("RunService").RenderStepped;
 local LocalPlayer = game:GetService("Players").LocalPlayer;
@@ -8,12 +9,10 @@ local Mouse = LocalPlayer:GetMouse();
 
 --Load Modules
 local Api = loadstring(game:HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/Api.lua"))();
---local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/Classes/Array.lua"))();
 
 local StatusClient = Api:GetHashCode();
 local Aegis = Instance.new("ScreenGui")
---ProtectGui(Aegis)
-
 Aegis.Name = StatusClient[1]
 Aegis.ZIndexBehavior = Enum.ZIndexBehavior.Global
 Aegis.Parent = CoreGui
@@ -39,6 +38,10 @@ do
      function Tools:MapValue(Value, MinA, MaxA, MinB, MaxB)
           return (1 - ((Value - MinA) / (MaxA - MinA))) * MinB + ((Value - MinA) / (MaxA - MinA)) * MaxB;
       end;
+
+	function Tools:GetTextSize(Text, Size, Font)
+	     return TextService:GetTextSize(Text, Size, Enum.Font[Font], Vector2.new(260, 1080))
+	end
 
      function Tools:Dragged(main, value)
           local dragging;
@@ -104,6 +107,8 @@ do
           local Link = Instance.new("TextLabel")
           local _main = Instance.new("ScrollingFrame")
           local _main_display = Instance.new("UIListLayout")
+          local _window_close = Instance.new("TextButton")
+          local _winc_corner = Instance.new("UICorner")
 
           local _header = Instance.new("Frame")
           local _h2 = Instance.new("TextLabel")
@@ -254,6 +259,32 @@ do
           _main_display.Name = "_main_display"
           _main_display.Parent = _main
           _main_display.SortOrder = Enum.SortOrder.LayoutOrder
+
+          _window_close.Name = "_window_close"
+          _window_close.Parent = game.StarterGui.Aegis._Body._Article._navbar
+          _window_close.AnchorPoint = Vector2.new(0.5, 0)
+          _window_close.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+          _window_close.BorderColor3 = Color3.fromRGB(255, 255, 255)
+          _window_close.BorderSizePixel = 0
+          _window_close.Position = UDim2.new(0.5, 0, 0.920000017, 0)
+          _window_close.Size = UDim2.new(0, 110, 0, 20)
+          _window_close.ZIndex = 3001
+          _window_close.AutoButtonColor = false
+          _window_close.Font = Enum.Font.RobotoMono
+          _window_close.Text = "]Exit"
+          _window_close.TextColor3 = Color3.fromRGB(255, 85, 127)
+          _window_close.TextSize = 14.000
+          _window_close.TextXAlignment = Enum.TextXAlignment.Left
+
+          _winc_corner.CornerRadius = UDim.new(0, 5)
+          _winc_corner.Name = "_winc_corner"
+          _winc_corner.Parent = _window_close
+
+          local connection
+          connection = _window_close.MouseButton1Click:Connect(function()
+               Aegis:Destroy();
+               connection:Disconnect();
+          end)
 
           _header.Name = "_header"
           _header.Parent = _Article
@@ -882,6 +913,74 @@ do
           end
 
           return TabPages
+     end
+
+     function Library:AddNotify(info)
+          local notify = {
+               desc = info.Description or "Description...",
+               state = info.State or "Primary",
+               wait = info.Wait or 5,
+
+               Theme = {
+                    Primary = Color3.fromRGB(172, 255, 178),
+                    Secondary = Color3.fromRGB(238, 201, 133),
+                    Third = Color3.fromRGB(247, 159, 159)
+               }
+          }
+
+          local Notify = Instance.new("Frame")
+          local UICorner = Instance.new("UICorner")
+          local _span = Instance.new("Frame")
+          local _span_corner = Instance.new("UICorner")
+          local UIListLayout = Instance.new("UIListLayout")
+          local _content = Instance.new("TextLabel")
+          local UIPadding = Instance.new("UIPadding")
+
+          Notify.Name = "Notify"
+          Notify.Parent = Aegis
+          Notify.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+          Notify.ClipsDescendants = true
+          Notify.Position = UDim2.new(0, 5, 0, 15)
+          Notify.Size = UDim2.new(0, 260, 0, 54)
+
+          UICorner.CornerRadius = UDim.new(0, 3)
+          UICorner.Parent = Notify
+
+          _span.Name = "_span"
+          _span.Parent = Notify
+          _span.BackgroundColor3 = Color3.fromRGB(179, 255, 186)
+          _span.BorderSizePixel = 0
+          _span.Size = UDim2.new(0, 3, 1, 0)
+
+          _span_corner.CornerRadius = UDim.new(1, 0)
+          _span_corner.Name = "_span_corner"
+          _span_corner.Parent = _span
+
+          UIListLayout.Parent = Notify
+          UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+          UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+          UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+          UIListLayout.Padding = UDim.new(0, 10)
+
+          _content.Name = "_content"
+          _content.Parent = Notify
+          _content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          _content.BackgroundTransparency = 1.000
+          _content.BorderSizePixel = 0
+          _content.Position = UDim2.new(0.0500000007, 0, 0.027777778, 0)
+          _content.Size = UDim2.new(0, 247, 1, 0)
+          _content.Font = Enum.Font.Cartoon
+          _content.Text = "Description..."
+          _content.TextColor3 = Color3.fromRGB(226, 226, 226)
+          _content.TextSize = 14.000
+          _content.TextWrapped = true
+          _content.TextXAlignment = Enum.TextXAlignment.Left
+          _content.TextYAlignment = Enum.TextYAlignment.Top
+
+          UIPadding.Parent = _content
+          UIPadding.PaddingTop = UDim.new(0, 5)
+
+
      end
 end
 
