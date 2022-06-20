@@ -5,6 +5,7 @@ function Array.map(tabla, callback)
     for index, value in pairs(tabla) do
       local element = value;
       value = callback(element, index);
+      NewArray[index] = value;
     end
 
     return NewArray;
