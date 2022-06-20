@@ -64,11 +64,12 @@ function Array.pprint(tabla)
     return parse;
 end
 
---Add Table Enviromments
+--Add Global Table New Methods
 do
-  warn("setting table Array enviromment...");
-  local __env = syn and getgenv() or warn("Error: Not found a function protect .env");
-  __env.Array = Array;
+  for key, value in pairs(Array) do
+    table[key] = value;
+  end
+  warn("Enviromment table loaded.");
 end
 
 return Array
