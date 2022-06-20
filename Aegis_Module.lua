@@ -948,7 +948,7 @@ do
 
           _span.Name = "_span"
           _span.Parent = Notify
-          _span.BackgroundColor3 = Color3.fromRGB(179, 255, 186)
+          _span.BackgroundColor3 = notify.Theme[notify.state]
           _span.BorderSizePixel = 0
           _span.Size = UDim2.new(0, 3, 1, 0)
 
@@ -970,7 +970,7 @@ do
           _content.Position = UDim2.new(0.0500000007, 0, 0.027777778, 0)
           _content.Size = UDim2.new(0, 247, 1, 0)
           _content.Font = Enum.Font.Cartoon
-          _content.Text = "Description..."
+          _content.Text = notify.desc
           _content.TextColor3 = Color3.fromRGB(226, 226, 226)
           _content.TextSize = 14.000
           _content.TextWrapped = true
@@ -980,7 +980,9 @@ do
           UIPadding.Parent = _content
           UIPadding.PaddingTop = UDim.new(0, 5)
 
-
+          function self:NotifyDisplay()
+               table.insert(self.CurrentNotify, { Notify, _content })
+          end
      end
 end
 
