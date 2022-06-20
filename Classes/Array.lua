@@ -14,7 +14,7 @@ function Array.split(string, pattern)
   local listSplit = {}
 
   for char in string.gmatch(string, "[^"..pattern.."]*") do
-    if not char == "" then
+    if char ~= "" then
       table.insert(listSplit, char);
     end
   end
