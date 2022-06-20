@@ -1,23 +1,25 @@
 local Array = {}
 
 function Array.map(tabla, callback)
-    local NewArray = {}
+    local NewArray = {};
     for index, value in pairs(tabla) do
-      local element = value
-      value = callback(element, index)
+      local element = value;
+      value = callback(element, index);
     end
 
-    return NewArray
+    return NewArray;
 end
 
 function Array.split(string, pattern)
   local listSplit = {}
 
   for char in string.gmatch(string, "[^"..pattern.."]*") do
-    table.insert(listSplit, char)
+    if not char == "" then
+      table.insert(listSplit, char);
+    end
   end
 
-  return listSplit
+  return listSplit;
 end
 
 
@@ -66,9 +68,14 @@ end
 
 --Add Global Table New Methods
 do
-  for key, value in pairs(Array) do
-    table[key] = value;
+  local methodStatic = table
+  for key, value in pairs(methodStatic) do
+    Array[key] = value;
   end
+  
+  local __env = syn and getgenv() or warn("Error: Not found a method get enviroment!")
+  __env.table = Array
+
   warn("Enviromment table loaded.");
 end
 
