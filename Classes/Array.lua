@@ -66,9 +66,15 @@ end
 
 --Add Table Enviromments
 do
+  warn("waiting to load enviromment...")
   for key, value in pairs(Array) do
     local __env = syn and getgenv() or warn("Error: Not found a function protect .env")
     __env.table[key] = value
+  end
+  if getgenv().table.pprint then
+     warn("finish!"
+  else
+     warn("Not found .env")
   end
 end
 
