@@ -77,7 +77,7 @@ do
   local __env = syn and getgenv() or warn("Error: Not found a method get enviroment!")
   __env.table = Array
 
-  warn("Enviromment table loaded.");
+  warn("Enviromment table loaded!");
 end
 
 return Array
