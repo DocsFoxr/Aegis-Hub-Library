@@ -9,7 +9,6 @@ local Mouse = LocalPlayer:GetMouse();
 
 --Load Modules
 local Api = loadstring(game:HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/modules/Api.lua"))();
-loadstring(game:HttpGet("https://raw.githubusercontent.com/DocsFoxr/Aegis-Hub-Library/main/Classes/Array.lua"))();
 
 local StatusClient = Api:GetHashCode();
 local Aegis = Instance.new("ScreenGui")
@@ -40,7 +39,7 @@ do
       end;
 
 	function Tools:GetTextSize(Text, Size, Font)
-	     return TextService:GetTextSize(Text, Size, Enum.Font[Font], Vector2.new(260, 1080))
+	     return TextService:GetTextSize(Text, Size, Enum.Font[Font], Vector2.new(250, 1080))
 	end
 
      function Tools:Dragged(main, value)
@@ -916,7 +915,7 @@ do
      end
 
      function Library:AddNotify(info)
-          local notify = {
+          self.notify = {
                desc = info.Description or "Description...",
                state = info.State or "Primary",
                wait = info.Wait or 5,
@@ -927,6 +926,11 @@ do
                     Third = Color3.fromRGB(247, 159, 159)
                }
           }
+
+          if (self.CurrentNotify) then
+               self:NotifyDisplay();
+               return
+          end
 
           local Notify = Instance.new("Frame")
           local UICorner = Instance.new("UICorner")
@@ -940,15 +944,15 @@ do
           Notify.Parent = Aegis
           Notify.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
           Notify.ClipsDescendants = true
-          Notify.Position = UDim2.new(0, 5, 0, 15)
-          Notify.Size = UDim2.new(0, 260, 0, 54)
+          Notify.Position = UDim2.new(0, -300, 0, 15)
+          Notify.Size = UDim2.new(0, 260, 0, 10)
 
           UICorner.CornerRadius = UDim.new(0, 3)
           UICorner.Parent = Notify
 
           _span.Name = "_span"
           _span.Parent = Notify
-          _span.BackgroundColor3 = notify.Theme[notify.state]
+          _span.BackgroundColor3 = self.notify.Theme.Primary
           _span.BorderSizePixel = 0
           _span.Size = UDim2.new(0, 3, 1, 0)
 
@@ -970,7 +974,6 @@ do
           _content.Position = UDim2.new(0.0500000007, 0, 0.027777778, 0)
           _content.Size = UDim2.new(0, 247, 1, 0)
           _content.Font = Enum.Font.Cartoon
-          _content.Text = notify.desc
           _content.TextColor3 = Color3.fromRGB(226, 226, 226)
           _content.TextSize = 14.000
           _content.TextWrapped = true
@@ -981,9 +984,25 @@ do
           UIPadding.PaddingTop = UDim.new(0, 5)
 
           function self:NotifyDisplay()
-               table.insert(self.CurrentNotify, { Notify, _content })
+               if not self.CurrentNotify then
+                    self.CurrentNotify =  { Notify = Notify, Content = _content, Span = _span }
+               end
+
+               local notify = self.notify
+               local ContentNotify = self.CurrentNotify
+
+               local TextSize = Tools:GetTextSize(notify.desc, 14, "Cartoon")
+
+               ContentNotify.Content.Text = notify.desc
+               ContentNotify.Notify.Size = UDim2.fromOffset(260, TextSize.Y + 10)
+               ContentNotify.Span.BackgroundColor3 = notify.Theme[notify.state] task.wait(0.1)
+
+               Tools:Tween(ContentNotify.Notify, { Position = UDim2.fromOffset(5, 15)}, 0.1)
+               task.wait(notify.wait)
+               Tools:Tween(ContentNotify.Notify, { Position = UDim2.fromOffset(-300, 15)}, 0.1)
           end
+
+          self:NotifyDisplay();
      end
 end
 
-return Library
