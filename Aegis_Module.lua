@@ -260,7 +260,7 @@ do
           _main_display.SortOrder = Enum.SortOrder.LayoutOrder
 
           _window_close.Name = "_window_close"
-          _window_close.Parent = game.StarterGui.Aegis._Body._Article._navbar
+          _window_close.Parent = _navbar
           _window_close.AnchorPoint = Vector2.new(0.5, 0)
           _window_close.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
           _window_close.BorderColor3 = Color3.fromRGB(255, 255, 255)
